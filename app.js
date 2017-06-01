@@ -1,13 +1,18 @@
+// Load environment vars
+require('dotenv').config()
+
 const express = require('express')
 const app = express()
-const config = require('./config');
-const serverPort = config.serverPort;
+const serverPort = process.env.SERVER_PORT;
 
-app.get('/', function (req, res) {
+app.listen(serverPort, function() {
+  console.log(`Server listening on port ${serverPort}!`);
+});
+
+app.get('/', function(req, res) {
   res.send('Hello World!')
-})
+});
 
-
-app.listen(serverPort, function () {
-  console.log(`server listening on port ${serverPort}!`)
-})
+app.get('/test', function(req, res) {
+  res.send('here');
+});
